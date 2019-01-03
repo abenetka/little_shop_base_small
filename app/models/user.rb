@@ -46,6 +46,16 @@ class User < ApplicationRecord
     .limit(count)
   end
 
+  def self.top_merchants_items_sold_last_month(count)
+    time_range = (Time.now - 2.month)..(Time.now - 1.month)
+    User.joins(:items, {items: :order_items})
+    .select("users.*, sum(order_items.quantity) as items_sold")
+    .where(order_items: { updated_at: time_range } )
+    .group(:id)
+    .order('items_sold desc')
+    .limit(count)
+  end
+
   def my_pending_orders
     Order.joins(order_items: :item)
       .where("items.merchant_id=? AND orders.status=? AND order_items.fulfilled=?", self.id, 0, false)

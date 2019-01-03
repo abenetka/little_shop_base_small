@@ -15,6 +15,7 @@ class MerchantsController < ApplicationController
     @top_3_cities = Order.top_3_cities
     @top_3_quantity_orders = Order.top_3_quantity_orders
     @top_10_merchants_items_sold_this_month = User.top_merchants_items_sold_this_month(10)
+    @top_10_merchants_items_sold_last_month = User.top_merchants_items_sold_last_month(10)
   end
 
   def show
