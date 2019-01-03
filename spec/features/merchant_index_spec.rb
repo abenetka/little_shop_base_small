@@ -145,4 +145,132 @@ NYC, Seattle WA, Seattle FL
       expect(page).to have_content("Merchant Dashboard for #{@merchant.name}")
     end
   end
+
+  describe 'it show leaderboard statistics' do
+    before :each do
+      @user_1 = create(:user, city: 'Denver', state: 'CO')
+      @user_2 = create(:user, city: 'NYC', state: 'NY')
+      @user_3 = create(:user, city: 'Seattle', state: 'WA')
+      @user_4 = create(:user, city: 'Seattle', state: 'FL')
+
+      @merchant_1 = create(:merchant, name: 'Merchant Name 1')
+      @merchant_2 = create(:merchant, name: 'Merchant Name 2')
+      @merchant_3 = create(:merchant, name: 'Merchant Name 3')
+      @merchant_4 = create(:merchant, name: 'Merchant Name 3')
+      @merchant_5 = create(:merchant, name: 'Merchant Name 3')
+      @merchant_6 = create(:merchant, name: 'Merchant Name 3')
+      @merchant_7 = create(:merchant, name: 'Merchant Name 3')
+      @merchant_8 = create(:merchant, name: 'Merchant Name 3')
+      @merchant_9 = create(:merchant, name: 'Merchant Name 3')
+      @merchant_10 = create(:merchant, name: 'Merchant Name 3')
+
+      @item_1 = create(:item, user: @merchant_1)
+      @item_2 = create(:item, user: @merchant_2)
+      @item_3 = create(:item, user: @merchant_3)
+      @item_4 = create(:item, user: @merchant_4)
+      @item_5 = create(:item, user: @merchant_5)
+      @item_6 = create(:item, user: @merchant_6)
+      @item_7 = create(:item, user: @merchant_7)
+      @item_8 = create(:item, user: @merchant_8)
+      @item_9 = create(:item, user: @merchant_9)
+      @item_10 = create(:item, user: @merchant_10)
+
+      @order_1 = create(:completed_order, user: @user_1)
+      @oi_1 = create(:fulfilled_order_item, item: @item_1, order: @order_1, quantity: 10, price: 11, created_at: 10.minutes.ago, updated_at: 9.minute.ago)
+
+      @order_2 = create(:completed_order, user: @user_2)
+      @oi_2 = create(:fulfilled_order_item, item: @item_2, order: @order_2, quantity: 20, price: 12, created_at: 2.days.ago, updated_at: 1.minute.ago)
+
+      @order_3 = create(:completed_order, user: @user_3)
+      @oi_3 = create(:fulfilled_order_item, item: @item_3, order: @order_3, quantity: 30, price: 13, created_at: 10.minutes.ago, updated_at: 5.minute.ago)
+
+      @order_4 = create(:completed_order, user: @user_4)
+      @oi_4 = create(:fulfilled_order_item, item: @item_4, order: @order_4, quantity: 40, price: 14, created_at: 10.minutes.ago, updated_at: 5.minute.ago)
+
+      @order_5 = create(:completed_order, user: @user_1)
+      @oi_5 = create(:fulfilled_order_item, item: @item_5, order: @order_5, quantity: 50, price: 15, created_at: 10.minutes.ago, updated_at: 5.minute.ago)
+
+      @order_6 = create(:completed_order, user: @user_2)
+      @oi_6 = create(:fulfilled_order_item, item: @item_6, order: @order_6, quantity: 60, price: 16, created_at: 10.minutes.ago, updated_at: 5.minute.ago)
+
+      @order_7 = create(:completed_order, user: @user_3)
+      @oi_7 = create(:fulfilled_order_item, item: @item_7, order: @order_7, quantity: 70, price: 17, created_at: 10.minutes.ago, updated_at: 5.minute.ago)
+
+      @order_8 = create(:completed_order, user: @user_4)
+      @oi_8 = create(:fulfilled_order_item, item: @item_8, order: @order_8, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 5.minute.ago)
+
+      @order_9 = create(:completed_order, user: @user_1)
+      @oi_9 = create(:fulfilled_order_item, item: @item_9, order: @order_9, quantity: 90, price: 19, created_at: 10.minutes.ago, updated_at: 5.minute.ago)
+
+      @order_10 = create(:completed_order, user: @user_2)
+      @oi_10 = create(:fulfilled_order_item, item: @item_10, order: @order_10, quantity: 100, price: 20, created_at: 10.minutes.ago, updated_at: 5.minute.ago)
+
+      @order_11 = create(:completed_order, user: @user_3)
+      @oi_11 = create(:fulfilled_order_item, item: @item_1, order: @order_11, quantity: 200, price: 11, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+      @order_12 = create(:completed_order, user: @user_4)
+      @oi_12 = create(:fulfilled_order_item, item: @item_2, order: @order_12, quantity: 190, price: 12, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+      @order_13 = create(:completed_order, user: @user_1)
+      @oi_13 = create(:fulfilled_order_item, item: @item_3, order: @order_13, quantity: 180, price: 13, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+      @order_14 = create(:completed_order, user: @user_2)
+      @oi_14 = create(:fulfilled_order_item, item: @item_4, order: @order_14, quantity: 170, price: 14, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+      @order_15 = create(:completed_order, user: @user_3)
+      @oi_15 = create(:fulfilled_order_item, item: @item_5, order: @order_15, quantity: 160, price: 15, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+      @order_16 = create(:completed_order, user: @user_4)
+      @oi_16 = create(:fulfilled_order_item, item: @item_6, order: @order_16, quantity: 150, price: 16, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+      @order_17 = create(:completed_order, user: @user_1)
+      @oi_17 = create(:fulfilled_order_item, item: @item_7, order: @order_17, quantity: 140, price: 17, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+      @order_18 = create(:completed_order, user: @user_2)
+      @oi_18 = create(:fulfilled_order_item, item: @item_8, order: @order_18, quantity: 130, price: 18, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+      @order_19 = create(:completed_order, user: @user_3)
+      @oi_19 = create(:fulfilled_order_item, item: @item_9, order: @order_19, quantity: 120, price: 19, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+      @order_20 = create(:completed_order, user: @user_4)
+      @oi_20 = create(:fulfilled_order_item, item: @item_10, order: @order_20, quantity: 110, price: 20, created_at: 3.months.ago, updated_at: 32.days.ago)
+    end
+
+    it 'shows top 10 merchants who sold the most items this month' do
+      visit merchants_path
+      save_and_open_page
+      within '#leaderboard' do
+        within '#top-10-merchants-items-sold-this-month' do
+          expect(page.all('.merchant')[0]).to have_content('Merchant Name 10, Total Items Sold: 100 Items')
+          expect(page.all('.merchant')[1]).to have_content('Merchant Name 9, Total Items Sold: 90 Items')
+          expect(page.all('.merchant')[2]).to have_content('Merchant Name 8, Total Items Sold: 80 Items')
+          expect(page.all('.merchant')[3]).to have_content('Merchant Name 7, Total Items Sold: 70 Items')
+          expect(page.all('.merchant')[4]).to have_content('Merchant Name 6, Total Items Sold: 60 Items')
+          expect(page.all('.merchant')[5]).to have_content('Merchant Name 5, Total Items Sold: 50 Items')
+          expect(page.all('.merchant')[6]).to have_content('Merchant Name 4, Total Items Sold: 40 Items')
+          expect(page.all('.merchant')[7]).to have_content('Merchant Name 3, Total Items Sold: 30 Items')
+          expect(page.all('.merchant')[8]).to have_content('Merchant Name 2, Total Items Sold: 20 Items')
+          expect(page.all('.merchant')[9]).to have_content('Merchant Name 1, Total Items Sold: 10 Items')
+        end
+      end
+    end
+
+    xit 'shows top 10 merchants who sold the most items last month' do
+      visit merchants_path
+      within '#leaderboard' do
+        within '#top-10-merchants-items-sold-last-month' do
+          expect(page.all('.merchant')[0]).to have_content('Merchant Name 1, Total Items Sold: 200 Items')
+          expect(page.all('.merchant')[1]).to have_content('Merchant Name 2, Total Items Sold: 190 Items')
+          expect(page.all('.merchant')[2]).to have_content('Merchant Name 3, Total Items Sold: 180 Items')
+          expect(page.all('.merchant')[3]).to have_content('Merchant Name 4, Total Items Sold: 170 Items')
+          expect(page.all('.merchant')[4]).to have_content('Merchant Name 5, Total Items Sold: 160 Items')
+          expect(page.all('.merchant')[5]).to have_content('Merchant Name 6, Total Items Sold: 150 Items')
+          expect(page.all('.merchant')[6]).to have_content('Merchant Name 7, Total Items Sold: 140 Items')
+          expect(page.all('.merchant')[7]).to have_content('Merchant Name 8, Total Items Sold: 130 Items')
+          expect(page.all('.merchant')[8]).to have_content('Merchant Name 9, Total Items Sold: 120 Items')
+          expect(page.all('.merchant')[9]).to have_content('Merchant Name 10, Total Items Sold: 110 Items')
+        end
+      end
+    end
+  end
 end
