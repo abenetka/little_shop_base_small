@@ -238,19 +238,18 @@ NYC, Seattle WA, Seattle FL
 
     it 'shows top 10 merchants who sold the most items this month' do
       visit merchants_path
-      save_and_open_page
       within '#leaderboard' do
         within '#top-10-merchants-items-sold-this-month' do
-          expect(page.all('.merchant')[0]).to have_content('Merchant Name 10, Total Items Sold: 100 Items')
-          expect(page.all('.merchant')[1]).to have_content('Merchant Name 9, Total Items Sold: 90 Items')
-          expect(page.all('.merchant')[2]).to have_content('Merchant Name 8, Total Items Sold: 80 Items')
-          expect(page.all('.merchant')[3]).to have_content('Merchant Name 7, Total Items Sold: 70 Items')
-          expect(page.all('.merchant')[4]).to have_content('Merchant Name 6, Total Items Sold: 60 Items')
-          expect(page.all('.merchant')[5]).to have_content('Merchant Name 5, Total Items Sold: 50 Items')
-          expect(page.all('.merchant')[6]).to have_content('Merchant Name 4, Total Items Sold: 40 Items')
-          expect(page.all('.merchant')[7]).to have_content('Merchant Name 3, Total Items Sold: 30 Items')
-          expect(page.all('.merchant')[8]).to have_content('Merchant Name 2, Total Items Sold: 20 Items')
-          expect(page.all('.merchant')[9]).to have_content('Merchant Name 1, Total Items Sold: 10 Items')
+          expect(page.all('.merchant')[0]).to have_content('Merchant Name 10, Items Sold: 100')
+          expect(page.all('.merchant')[1]).to have_content('Merchant Name 9, Items Sold: 90')
+          expect(page.all('.merchant')[2]).to have_content('Merchant Name 8, Items Sold: 80')
+          expect(page.all('.merchant')[3]).to have_content('Merchant Name 7, Items Sold: 70')
+          expect(page.all('.merchant')[4]).to have_content('Merchant Name 6, Items Sold: 60')
+          expect(page.all('.merchant')[5]).to have_content('Merchant Name 5, Items Sold: 50')
+          expect(page.all('.merchant')[6]).to have_content('Merchant Name 4, Items Sold: 40')
+          expect(page.all('.merchant')[7]).to have_content('Merchant Name 3, Items Sold: 30')
+          expect(page.all('.merchant')[8]).to have_content('Merchant Name 2, Items Sold: 20')
+          expect(page.all('.merchant')[9]).to have_content('Merchant Name 1, Items Sold: 10')
         end
       end
     end
@@ -259,16 +258,16 @@ NYC, Seattle WA, Seattle FL
       visit merchants_path
       within '#leaderboard' do
         within '#top-10-merchants-items-sold-last-month' do
-          expect(page.all('.merchant')[0]).to have_content('Merchant Name 1, Total Items Sold: 200 Items')
-          expect(page.all('.merchant')[1]).to have_content('Merchant Name 2, Total Items Sold: 190 Items')
-          expect(page.all('.merchant')[2]).to have_content('Merchant Name 3, Total Items Sold: 180 Items')
-          expect(page.all('.merchant')[3]).to have_content('Merchant Name 4, Total Items Sold: 170 Items')
-          expect(page.all('.merchant')[4]).to have_content('Merchant Name 5, Total Items Sold: 160 Items')
-          expect(page.all('.merchant')[5]).to have_content('Merchant Name 6, Total Items Sold: 150 Items')
-          expect(page.all('.merchant')[6]).to have_content('Merchant Name 7, Total Items Sold: 140 Items')
-          expect(page.all('.merchant')[7]).to have_content('Merchant Name 8, Total Items Sold: 130 Items')
-          expect(page.all('.merchant')[8]).to have_content('Merchant Name 9, Total Items Sold: 120 Items')
-          expect(page.all('.merchant')[9]).to have_content('Merchant Name 10, Total Items Sold: 110 Items')
+          expect(page.all('.merchant')[0]).to have_content('Merchant Name 1, Items Sold: 200')
+          expect(page.all('.merchant')[1]).to have_content('Merchant Name 2, Items Sold: 190')
+          expect(page.all('.merchant')[2]).to have_content('Merchant Name 3, Items Sold: 180')
+          expect(page.all('.merchant')[3]).to have_content('Merchant Name 4, Items Sold: 170')
+          expect(page.all('.merchant')[4]).to have_content('Merchant Name 5, Items Sold: 160')
+          expect(page.all('.merchant')[5]).to have_content('Merchant Name 6, Items Sold: 150')
+          expect(page.all('.merchant')[6]).to have_content('Merchant Name 7, Items Sold: 140')
+          expect(page.all('.merchant')[7]).to have_content('Merchant Name 8, Items Sold: 130')
+          expect(page.all('.merchant')[8]).to have_content('Merchant Name 9, Items Sold: 120')
+          expect(page.all('.merchant')[9]).to have_content('Merchant Name 10, Items Sold: 110')
         end
       end
     end
