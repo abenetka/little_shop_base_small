@@ -254,7 +254,7 @@ NYC, Seattle WA, Seattle FL
       end
     end
 
-    xit 'shows top 10 merchants who sold the most items last month' do
+    it 'shows top 10 merchants who sold the most items last month' do
       visit merchants_path
       within '#leaderboard' do
         within '#top-10-merchants-items-sold-last-month' do
