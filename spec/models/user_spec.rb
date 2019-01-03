@@ -174,6 +174,13 @@ RSpec.describe User, type: :model do
         expect(User.top_merchants_items_sold_this_month(10)[1]).to eq(@merchant_9)
         expect(User.top_merchants_items_sold_this_month(10)[2]).to eq(@merchant_8)
       end
+
+      it '.top_merchants_items_sold_last_month' do
+        expect(User.top_merchants_items_sold_last_month(10)[0]).to eq(@merchant_1)
+        expect(User.top_merchants_items_sold_last_month(10).length).to eq(10)
+        expect(User.top_merchants_items_sold_last_month(10)[1]).to eq(@merchant_2)
+        expect(User.top_merchants_items_sold_last_month(10)[2]).to eq(@merchant_3)
+      end
     end
   end
 
