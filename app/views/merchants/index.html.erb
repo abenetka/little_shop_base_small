@@ -102,3 +102,16 @@
     </ol>
   <% end %>
 <% end %>
+
+<%= tag.div id: 'leaderboard' do %>
+  <%= tag.div id: 'top-10-merchants-items-sold-this-month' do %>
+    <h4>Top 10 Merchants by Items Sold this Month</h4>
+    <ol>
+    <% @top_10_merchants_items_sold_this_month.each do |merchant| %>
+    <%= tag.li class: 'merchant' do %>
+    <%= merchant.name %>, Items Sold: <%= merchant.items_sold %>
+    <% end %>
+    <% end %>
+    </ol>
+  <% end %>
+<% end %>
