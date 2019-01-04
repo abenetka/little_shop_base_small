@@ -112,6 +112,80 @@ NYC, Seattle WA, Seattle FL
         end
       end
     end
+    describe 'it shows stats to logged in users' do
+      before :each do
+        @user_1 = create(:user, city: 'Denver', state: 'CO')
+        @user_2 = create(:user, city: 'NYC', state: 'NY')
+        @user_3 = create(:user, city: 'Seattle', state: 'WA')
+        @user_4 = create(:user, city: 'Seattle', state: 'FL')
+
+        visit login_path
+
+        fill_in :email, with: @user_1.email
+        fill_in :password, with: @user_1.password
+        click_button 'Log in'
+
+        @merchant_1 = create(:merchant, name: 'Merchant Name 1')
+        @merchant_2 = create(:merchant, name: 'Merchant Name 2')
+        @merchant_3 = create(:merchant, name: 'Merchant Name 3')
+        @merchant_4 = create(:merchant, name: 'Merchant Name 4')
+        @merchant_5 = create(:merchant, name: 'Merchant Name 5')
+        @merchant_6 = create(:merchant, name: 'Merchant Name 6')
+        @merchant_7 = create(:merchant, name: 'Merchant Name 7')
+        @merchant_8 = create(:merchant, name: 'Merchant Name 8')
+
+        @item_1 = create(:item, user: @merchant_1)
+        @item_2 = create(:item, user: @merchant_2)
+        @item_3 = create(:item, user: @merchant_3)
+        @item_4 = create(:item, user: @merchant_4)
+        @item_5 = create(:item, user: @merchant_5)
+        @item_6 = create(:item, user: @merchant_6)
+        @item_7 = create(:item, user: @merchant_7)
+        @item_8 = create(:item, user: @merchant_8)
+
+        @order_1 = create(:completed_order, user: @user_3)
+        @oi_1 = create(:fulfilled_order_item, item: @item_1, order: @order_1, quantity: 10, price: 11, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+
+        @order_2 = create(:completed_order, user: @user_3)
+        @oi_2 = create(:fulfilled_order_item, item: @item_2, order: @order_2, quantity: 20, price: 12, created_at: 10.minutes.ago, updated_at: 8.minutes.ago)
+
+        @order_3 = create(:completed_order, user: @user_3)
+        @oi_3 = create(:fulfilled_order_item, item: @item_3, order: @order_3, quantity: 30, price: 13, created_at: 10.minutes.ago, updated_at: 7.minutes.ago)
+
+        @order_4 = create(:completed_order, user: @user_3)
+        @oi_4 = create(:fulfilled_order_item, item: @item_4, order: @order_4, quantity: 40, price: 14, created_at: 10.minutes.ago, updated_at: 6.minutes.ago)
+
+        @order_5 = create(:completed_order, user: @user_3)
+        @oi_5 = create(:fulfilled_order_item, item: @item_5, order: @order_5, quantity: 50, price: 15, created_at: 10.minutes.ago, updated_at: 5.minutes.ago)
+
+        @order_6 = create(:completed_order, user: @user_4)
+        @oi_6 = create(:fulfilled_order_item, item: @item_6, order: @order_6, quantity: 60, price: 16, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+
+        @order_7 = create(:cancelled_order, user: @user_3)
+        @oi_7 = create(:fulfilled_order_item ,item: @item_7, order: @order_7, quantity: 70, price: 17, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+
+        @order_8 = create(:completed_order, user: @user_1)
+        @oi_8 = create(:fulfilled_order_item, item: @item_8, order: @order_8, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+      end
+
+      it 'shows top 5 merchants who fulfilled items fastest to a state' do
+        visit merchants_path
+        within '#leaderboard' do
+          within '#top-5-fastest-fulfilled-state' do
+            expect(page.all('.merchant')[0]).to have_content("#{@merchant_1.name}")
+            expect(page.all('.merchant')[1]).to have_content("#{@merchant_2.name}")
+            expect(page.all('.merchant')[2]).to have_content("#{@merchant_3.name}")
+            expect(page.all('.merchant')[3]).to have_content("#{@merchant_4.name}")
+            expect(page.all('.merchant')[4]).to have_content("#{@merchant_5.name}")
+            expect(page).to_not have_conent("#{@merchant_6.name}")
+            expect(page).to_not have_conent("#{@merchant_7.name}")
+            expect(page).to_not have_conent("#{@merchant_8.name}")
+          end
+        end
+      end
+    end
+
+
   end
   context 'as an admin user' do
     before :each do
