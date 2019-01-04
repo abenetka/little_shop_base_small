@@ -166,6 +166,12 @@ RSpec.describe User, type: :model do
 
         @order_20 = create(:completed_order, user: @user_4)
         @oi_20 = create(:fulfilled_order_item, item: @item_10, order: @order_20, quantity: 110, price: 20, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+        @order_21 = create(:completed_order, user: @user_1)
+        @oi_20 = create(:fulfilled_order_item, item: @item_1, order: @order_21, quantity: 2, price: 20, created_at: 3.months.ago, updated_at: 32.days.ago)
+
+        @order_22 = create(:completed_order, user: @user_2)
+        @oi_20 = create(:fulfilled_order_item, item: @item_2, order: @order_22, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 32.days.ago)
       end
 
       it '.top_merchants_items_sold_this_month' do
@@ -181,6 +187,11 @@ RSpec.describe User, type: :model do
         expect(User.top_merchants_items_sold_last_month(10)[1]).to eq(@merchant_2)
         expect(User.top_merchants_items_sold_last_month(10)[2]).to eq(@merchant_3)
       end
+
+      it '.top_merchants_fulfilled_orders_this_month' do
+        # expect(User.top_merchants_fulfilled_orders_this_month(10)[0]).to eq(@merchant_1)
+      end
+
     end
   end
 

@@ -271,5 +271,24 @@ NYC, Seattle WA, Seattle FL
         end
       end
     end
+
+    xit 'shows top 10 merchants who fulfilled non-cancelled orders this month' do
+      visit merchants_path
+      within '#leaderboard' do
+        within '#top-10-merchants-fulfilled-orders-this-month' do
+          # expect(page.all('.merchant')[0]).to have_content('Merchant Name 1, Items Sold: 200')
+          # expect(page.all('.merchant')[1]).to have_content('Merchant Name 2, Items Sold: 190')
+          # expect(page.all('.merchant')[2]).to have_content('Merchant Name 3, Items Sold: 180')
+          # expect(page.all('.merchant')[3]).to have_content('Merchant Name 4, Items Sold: 170')
+          # expect(page.all('.merchant')[4]).to have_content('Merchant Name 5, Items Sold: 160')
+          # expect(page.all('.merchant')[5]).to have_content('Merchant Name 6, Items Sold: 150')
+          # expect(page.all('.merchant')[6]).to have_content('Merchant Name 7, Items Sold: 140')
+          # expect(page.all('.merchant')[7]).to have_content('Merchant Name 8, Items Sold: 130')
+          # expect(page.all('.merchant')[8]).to have_content('Merchant Name 9, Items Sold: 120')
+          # expect(page.all('.merchant')[9]).to have_content('Merchant Name 10, Items Sold: 110')
+        end
+      end
+    end
+
   end
 end
