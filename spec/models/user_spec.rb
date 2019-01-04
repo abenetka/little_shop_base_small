@@ -175,10 +175,10 @@ RSpec.describe User, type: :model do
       end
 
       it '.top_merchants_items_sold_this_month' do
-        expect(User.top_merchants_items_sold_this_month(10)[0]).to eq(@merchant_10)
-        expect(User.top_merchants_items_sold_this_month(10).length).to eq(10)
-        expect(User.top_merchants_items_sold_this_month(10)[1]).to eq(@merchant_9)
-        expect(User.top_merchants_items_sold_this_month(10)[2]).to eq(@merchant_8)
+        expect(User.top_merchants_items_sold_this_month(3)[0]).to eq(@merchant_10)
+        expect(User.top_merchants_items_sold_this_month(3).length).to eq(3)
+        expect(User.top_merchants_items_sold_this_month(3)[1]).to eq(@merchant_9)
+        expect(User.top_merchants_items_sold_this_month(3)[2]).to eq(@merchant_8)
       end
 
       it '.top_merchants_items_sold_last_month' do
@@ -190,6 +190,61 @@ RSpec.describe User, type: :model do
 
       it '.top_merchants_fulfilled_orders_this_month' do
         # expect(User.top_merchants_fulfilled_orders_this_month(10)[0]).to eq(@merchant_1)
+      end
+    end
+
+    describe 'merchant leadboard fastest fulfillment times'do
+      before :each do
+        @user_1 = create(:user, city: 'Denver', state: 'CO')
+        @user_2 = create(:user, city: 'NYC', state: 'NY')
+        @user_3 = create(:user, city: 'Seattle', state: 'WA')
+        @user_4 = create(:user, city: 'Seattle', state: 'FL')
+
+        @merchant_1 = create(:merchant, name: 'Merchant Name 1')
+        @merchant_2 = create(:merchant, name: 'Merchant Name 2')
+        @merchant_3 = create(:merchant, name: 'Merchant Name 3')
+        @merchant_4 = create(:merchant, name: 'Merchant Name 4')
+        @merchant_5 = create(:merchant, name: 'Merchant Name 5')
+        @merchant_6 = create(:merchant, name: 'Merchant Name 6')
+        @merchant_7 = create(:merchant, name: 'Merchant Name 7')
+        @merchant_8 = create(:merchant, name: 'Merchant Name 8')
+
+        @item_1 = create(:item, user: @merchant_1)
+        @item_2 = create(:item, user: @merchant_2)
+        @item_3 = create(:item, user: @merchant_3)
+        @item_4 = create(:item, user: @merchant_4)
+        @item_5 = create(:item, user: @merchant_5)
+        @item_6 = create(:item, user: @merchant_6)
+        @item_7 = create(:item, user: @merchant_7)
+        @item_8 = create(:item, user: @merchant_8)
+
+        @order_1 = create(:completed_order, user: @user_3)
+        @oi_1 = create(:fulfilled_order_item, item: @item_1, order: @order_1, quantity: 10, price: 11, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+
+        @order_2 = create(:completed_order, user: @user_3)
+        @oi_2 = create(:fulfilled_order_item, item: @item_2, order: @order_2, quantity: 20, price: 12, created_at: 10.minutes.ago, updated_at: 8.minutes.ago)
+
+        @order_3 = create(:completed_order, user: @user_3)
+        @oi_3 = create(:fulfilled_order_item, item: @item_3, order: @order_3, quantity: 30, price: 13, created_at: 10.minutes.ago, updated_at: 7.minutes.ago)
+
+        @order_4 = create(:completed_order, user: @user_3)
+        @oi_4 = create(:fulfilled_order_item, item: @item_4, order: @order_4, quantity: 40, price: 14, created_at: 10.minutes.ago, updated_at: 6.minutes.ago)
+
+        @order_5 = create(:completed_order, user: @user_3)
+        @oi_5 = create(:fulfilled_order_item, item: @item_5, order: @order_5, quantity: 50, price: 15, created_at: 10.minutes.ago, updated_at: 5.minutes.ago)
+
+        @order_6 = create(:completed_order, user: @user_4)
+        @oi_6 = create(:fulfilled_order_item, item: @item_6, order: @order_6, quantity: 60, price: 16, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+
+        @order_7 = create(:cancelled_order, user: @user_3)
+        @oi_7 = create(:fulfilled_order_item ,item: @item_7, order: @order_7, quantity: 70, price: 17, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+
+        @order_8 = create(:completed_order, user: @user_1)
+        @oi_8 = create(:fulfilled_order_item, item: @item_8, order: @order_8, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+      end
+
+      it '.top_merchants_fulfilled_orders_state' do
+        expect(User.top_merchants_fulfilled_orders_state(5)[0]).to eq(@merchant_1)
       end
 
     end
