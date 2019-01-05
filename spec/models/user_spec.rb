@@ -404,11 +404,190 @@ RSpec.describe User, type: :model do
 
         #sad path cancelled and out of time frame
         @order_59 = create(:cancelled_order, user: @user_2)
-        @oi_59 = create(:fulfilled_order_item, item: @item_10, order: @order_59, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 32.days.ago)
+        @oi_59 = create(:fulfilled_order_item, item: @item_10, order: @order_59, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 4.months.ago)
 
         #sad path fulfilled but not in time frame
         @order_60 = create(:completed_order, user: @user_2)
-        @oi_60 = create(:fulfilled_order_item, item: @item_10, order: @order_60, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 32.days.ago)
+        @oi_60 = create(:fulfilled_order_item, item: @item_10, order: @order_60, quantity: 1, price: 20, created_at: 5.months.ago, updated_at: 4.months.ago)
+
+
+        @order_61 = create(:completed_order, user: @user_1)
+        @oi_61 = create(:fulfilled_order_item, item: @item_10, order: @order_61, quantity: 10, price: 11, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_62 = create(:completed_order, user: @user_2)
+        @oi_62 = create(:fulfilled_order_item, item: @item_10, order: @order_62, quantity: 20, price: 12, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_63 = create(:completed_order, user: @user_3)
+        @oi_63 = create(:fulfilled_order_item, item: @item_10, order: @order_63, quantity: 30, price: 13, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_64 = create(:completed_order, user: @user_4)
+        @oi_64 = create(:fulfilled_order_item, item: @item_10, order: @order_64, quantity: 40, price: 14, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_65 = create(:completed_order, user: @user_1)
+        @oi_65 = create(:fulfilled_order_item, item: @item_10, order: @order_65, quantity: 50, price: 15, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_66 = create(:completed_order, user: @user_2)
+        @oi_66 = create(:fulfilled_order_item, item: @item_10, order: @order_66, quantity: 60, price: 16, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_67 = create(:completed_order, user: @user_3)
+        @oi_67 = create(:fulfilled_order_item, item: @item_10, order: @order_67, quantity: 70, price: 17, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_68 = create(:completed_order, user: @user_4)
+        @oi_68 = create(:fulfilled_order_item, item: @item_10, order: @order_68, quantity: 80, price: 18, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_69 = create(:completed_order, user: @user_1)
+        @oi_69 = create(:fulfilled_order_item, item: @item_10, order: @order_69, quantity: 90, price: 19, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_70 = create(:completed_order, user: @user_2)
+        @oi_70 = create(:fulfilled_order_item, item: @item_10, order: @order_70, quantity: 100, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+
+        @order_71 = create(:completed_order, user: @user_3)
+        @oi_71 = create(:fulfilled_order_item, item: @item_9, order: @order_71, quantity: 200, price: 11, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_72 = create(:completed_order, user: @user_4)
+        @oi_72 = create(:fulfilled_order_item, item: @item_9, order: @order_72, quantity: 190, price: 12, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_73 = create(:completed_order, user: @user_1)
+        @oi_73 = create(:fulfilled_order_item, item: @item_9, order: @order_73, quantity: 180, price: 13, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_74 = create(:completed_order, user: @user_2)
+        @oi_74 = create(:fulfilled_order_item, item: @item_9, order: @order_74, quantity: 170, price: 14, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_75 = create(:completed_order, user: @user_3)
+        @oi_75 = create(:fulfilled_order_item, item: @item_9, order: @order_75, quantity: 160, price: 15, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_76 = create(:completed_order, user: @user_4)
+        @oi_76 = create(:fulfilled_order_item, item: @item_9, order: @order_76, quantity: 150, price: 16, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_77 = create(:completed_order, user: @user_1)
+        @oi_77 = create(:fulfilled_order_item, item: @item_9, order: @order_77, quantity: 140, price: 17, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_78 = create(:completed_order, user: @user_2)
+        @oi_78 = create(:fulfilled_order_item, item: @item_9, order: @order_78, quantity: 130, price: 18, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_79 = create(:completed_order, user: @user_3)
+        @oi_79 = create(:fulfilled_order_item, item: @item_9, order: @order_79, quantity: 120, price: 19, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+
+        @order_80 = create(:completed_order, user: @user_4)
+        @oi_80 = create(:fulfilled_order_item, item: @item_8, order: @order_80, quantity: 110, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_81 = create(:completed_order, user: @user_1)
+        @oi_81 = create(:fulfilled_order_item, item: @item_8, order: @order_81, quantity: 2, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_82 = create(:completed_order, user: @user_2)
+        @oi_82 = create(:fulfilled_order_item, item: @item_8, order: @order_82, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_83 = create(:completed_order, user: @user_2)
+        @oi_83 = create(:fulfilled_order_item, item: @item_8, order: @order_83, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_84 = create(:completed_order, user: @user_2)
+        @oi_84 = create(:fulfilled_order_item, item: @item_8, order: @order_84, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_85 = create(:completed_order, user: @user_2)
+        @oi_85 = create(:fulfilled_order_item, item: @item_8, order: @order_85, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_86 = create(:completed_order, user: @user_2)
+        @oi_86 = create(:fulfilled_order_item, item: @item_8, order: @order_86, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_87 = create(:completed_order, user: @user_2)
+        @oi_87 = create(:fulfilled_order_item, item: @item_8, order: @order_87, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+
+        @order_88 = create(:completed_order, user: @user_2)
+        @oi_88 = create(:fulfilled_order_item, item: @item_7, order: @order_88, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_89 = create(:completed_order, user: @user_2)
+        @oi_89 = create(:fulfilled_order_item, item: @item_7, order: @order_89, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_90 = create(:completed_order, user: @user_2)
+        @oi_90 = create(:fulfilled_order_item, item: @item_7, order: @order_90, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_91 = create(:completed_order, user: @user_2)
+        @oi_91 = create(:fulfilled_order_item, item: @item_7, order: @order_91, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_92 = create(:completed_order, user: @user_2)
+        @oi_92 = create(:fulfilled_order_item, item: @item_7, order: @order_92, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_93 = create(:completed_order, user: @user_2)
+        @oi_93 = create(:fulfilled_order_item, item: @item_7, order: @order_93, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_94 = create(:completed_order, user: @user_2)
+        @oi_94 = create(:fulfilled_order_item, item: @item_7, order: @order_94, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+
+        @order_96 = create(:completed_order, user: @user_2)
+        @oi_96 = create(:fulfilled_order_item, item: @item_6, order: @order_96, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_97 = create(:completed_order, user: @user_2)
+        @oi_97 = create(:fulfilled_order_item, item: @item_6, order: @order_97, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_98 = create(:completed_order, user: @user_2)
+        @oi_98 = create(:fulfilled_order_item, item: @item_6, order: @order_98, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_99 = create(:completed_order, user: @user_2)
+        @oi_99 = create(:fulfilled_order_item, item: @item_6, order: @order_99, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_100 = create(:completed_order, user: @user_2)
+        @oi_100 = create(:fulfilled_order_item, item: @item_6, order: @order_100, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_101 = create(:completed_order, user: @user_2)
+        @oi_101 = create(:fulfilled_order_item, item: @item_6, order: @order_101, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+
+        @order_102 = create(:completed_order, user: @user_2)
+        @oi_102 = create(:fulfilled_order_item, item: @item_5, order: @order_102, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_103 = create(:completed_order, user: @user_2)
+        @oi_103 = create(:fulfilled_order_item, item: @item_5, order: @order_103, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_104 = create(:completed_order, user: @user_2)
+        @oi_104 = create(:fulfilled_order_item, item: @item_5, order: @order_104, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_105 = create(:completed_order, user: @user_2)
+        @oi_105 = create(:fulfilled_order_item, item: @item_5, order: @order_105, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_106 = create(:completed_order, user: @user_2)
+        @oi_106 = create(:fulfilled_order_item, item: @item_5, order: @order_106, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+
+        @order_107 = create(:completed_order, user: @user_2)
+        @oi_107 = create(:fulfilled_order_item, item: @item_4, order: @order_107, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_108 = create(:completed_order, user: @user_2)
+        @oi_108 = create(:fulfilled_order_item, item: @item_4, order: @order_108, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_109 = create(:completed_order, user: @user_2)
+        @oi_109 = create(:fulfilled_order_item, item: @item_4, order: @order_109, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_110 = create(:completed_order, user: @user_2)
+        @oi_110 = create(:fulfilled_order_item, item: @item_4, order: @order_110, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+
+        @order_111 = create(:completed_order, user: @user_2)
+        @oi_111 = create(:fulfilled_order_item, item: @item_3, order: @order_111, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_112 = create(:completed_order, user: @user_2)
+        @oi_112 = create(:fulfilled_order_item, item: @item_3, order: @order_112, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_113 = create(:completed_order, user: @user_2)
+        @oi_113 = create(:fulfilled_order_item, item: @item_3, order: @order_113, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+
+        @order_114 = create(:completed_order, user: @user_2)
+        @oi_114 = create(:fulfilled_order_item, item: @item_2, order: @order_114, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        @order_115 = create(:completed_order, user: @user_2)
+        @oi_115 = create(:fulfilled_order_item, item: @item_2, order: @order_115, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+
+        @order_116 = create(:completed_order, user: @user_2)
+        @oi_116 = create(:fulfilled_order_item, item: @item_1, order: @order_116, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
+
+        #sad path within time frame, but cancelled
+        @order_117 = create(:cancelled_order, user: @user_2)
+        @oi_117 = create(:fulfilled_order_item, item: @item_1, order: @order_117, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
       end
 
       it '.top_merchants_fulfilled_orders_this_month' do
@@ -418,6 +597,15 @@ RSpec.describe User, type: :model do
         expect(User.top_merchants_fulfilled_orders_this_month(5).first.order_count).to eq(10)
         expect(User.top_merchants_fulfilled_orders_this_month(10).last.order_count).to eq(1)
       end
+
+      it '.top_merchants_fulfilled_orders_last_month' do
+        expect(User.top_merchants_fulfilled_orders_last_month(5)[0]).to eq(@merchant_10)
+        expect(User.top_merchants_fulfilled_orders_last_month(5)[2]).to eq(@merchant_8)
+        expect(User.top_merchants_fulfilled_orders_last_month(5)[4]).to eq(@merchant_6)
+        expect(User.top_merchants_fulfilled_orders_last_month(5).first.order_count).to eq(10)
+        expect(User.top_merchants_fulfilled_orders_last_month(10).last.order_count).to eq(1)
+      end
+
     end
 
     describe 'merchant leadboard fastest fulfillment times'do
