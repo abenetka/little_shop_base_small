@@ -245,10 +245,11 @@ RSpec.describe User, type: :model do
         @oi_8 = create(:fulfilled_order_item, item: @item_8, order: @order_8, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
       end
 
-      xit '.top_merchants_fulfilled_orders_state' do
-        expect(User.top_merchants_fulfilled_orders_state(5)[0]).to eq(@merchant_1)
-        expect(User.top_merchants_fulfilled_orders_state(5)[2]).to eq(@merchant_3)
-        expect(User.top_merchants_fulfilled_orders_state(5)[4]).to eq(@merchant_5)
+      it '.top_merchants_fulfilled_orders_state' do
+        # binding.pry
+        expect(@user_3.top_merchants_fulfilled_orders_state(5)[0]).to eq(@merchant_1)
+        # expect(User.top_merchants_fulfilled_orders_state(5)[2]).to eq(@merchant_3)
+        # expect(User.top_merchants_fulfilled_orders_state(5)[4]).to eq(@merchant_5)
       end
 
     end
