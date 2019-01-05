@@ -56,6 +56,47 @@ class User < ApplicationRecord
     .limit(count)
   end
 
+  def self.top_merchants_fulfilled_orders_this_month(count)
+    User.joins('inner join items i on i.merchant_id=users.id inner join order_items oi on oi.item_id=i.id inner join orders o on o.id=oi.order_id')
+    .select("users.*, count(distinct o.id) as order_count")
+    .where("oi.fulfilled=? AND o.status!=?", true, 2)
+    .where('extract(month from oi.updated_at)= ?', 1)
+    .group(:id)
+    .order("order_count desc")
+    .limit(count)
+  end
+
+  def self.top_merchants_fulfilled_orders_last_month(count)
+    User.joins('inner join items i on i.merchant_id=users.id inner join order_items oi on oi.item_id=i.id inner join orders o on o.id=oi.order_id')
+    .select("users.*, count(distinct o.id) as order_count")
+    .where("oi.fulfilled=? AND o.status!=?", true, 2)
+    .where('extract(month from oi.updated_at)= ?', 12)
+    .group(:id)
+    .order("order_count desc")
+    .limit(count)
+  end
+
+
+  # def top_merchants_fulfilled_orders_state(count)
+  #     order_id_list = User.joins(:orders).where("users.state=?", self.state).pluck(:id)
+  #     User.joins('inner join items i on i.merchant_id=users.id inner join order_items oi on oi.item_id=i.id inner join orders o on o.id=oi.order_id')
+  #     .select("users.*, avg(oi.updated_at - oi.created_at) as avg_f_time")
+  #     .where("o.id=? AND oi.fulfilled=?", order_id_list, true)
+  #     .group(:id).order("avg_f_time desc")
+  #     .limit(count)
+  # end
+
+
+  # def self.top_merchants_fulfilled_orders_state(count)
+  #     User.joins('inner join items i on i.merchant_id=users.id inner join order_items oi on oi.item_id=i.id inner join orders o on o.id=oi.order_id')
+  #     .select("users.*, avg(oi.updated_at - oi.created_at) as fast_fill")
+  #     .where("oi.fulfilled = ? AND o.user_id=?", true, current_user.id)
+  #     .where("users.state=?", current_user.state)
+  #     .group(:id)
+  #     .order('fast_fill desc')
+  #     .limit(5)
+  # end
+
   def my_pending_orders
     Order.joins(order_items: :item)
       .where("items.merchant_id=? AND orders.status=? AND order_items.fulfilled=?", self.id, 0, false)
