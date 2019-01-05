@@ -125,4 +125,17 @@
     <% end %>
     </ol>
   <% end %>
-<% end %>
+  <% end %>
+
+
+  <!-- < %= tag.div id: 'top-5-fastest-fulfilled-state' do %>
+    <h4>Top 5 Fastest Merchants for Fulfilled Orders to my State</h4>
+    <ol>
+    < % @top_5_merchants_fulfilled_orders_state.each do |merchant| %>
+    < %= tag.li class: 'merchant' do %>
+    < %= merchant.name %>, Fulfillment Time: < %= merchant.fast_fill %>
+    < % end %>
+    < % end %>
+    </ol>
+  < % end %>
+< % end %> -->

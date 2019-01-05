@@ -56,6 +56,16 @@ class User < ApplicationRecord
     .limit(count)
   end
 
+  # def self.top_merchants_fulfilled_orders_state(count)
+  #     User.joins('inner join items i on i.merchant_id=users.id inner join order_items oi on oi.item_id=i.id inner join orders o on o.id=oi.order_id')
+  #     .select("users.*, avg(oi.updated_at - oi.created_at) as fast_fill")
+  #     .where("oi.fulfilled = ? AND o.user_id=?", true, current_user.id)
+  #     .where("users.state=?", current_user.state)
+  #     .group(:id)
+  #     .order('fast_fill desc')
+  #     .limit(5)
+  # end
+
   def my_pending_orders
     Order.joins(order_items: :item)
       .where("items.merchant_id=? AND orders.status=? AND order_items.fulfilled=?", self.id, 0, false)
