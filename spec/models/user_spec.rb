@@ -200,6 +200,8 @@ RSpec.describe User, type: :model do
         @user_3 = create(:user, city: 'Seattle', state: 'WA')
         @user_4 = create(:user, city: 'Seattle', state: 'FL')
 
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_3)
+
         @merchant_1 = create(:merchant, name: 'Merchant Name 1')
         @merchant_2 = create(:merchant, name: 'Merchant Name 2')
         @merchant_3 = create(:merchant, name: 'Merchant Name 3')
@@ -243,8 +245,10 @@ RSpec.describe User, type: :model do
         @oi_8 = create(:fulfilled_order_item, item: @item_8, order: @order_8, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
       end
 
-      it '.top_merchants_fulfilled_orders_state' do
+      xit '.top_merchants_fulfilled_orders_state' do
         expect(User.top_merchants_fulfilled_orders_state(5)[0]).to eq(@merchant_1)
+        expect(User.top_merchants_fulfilled_orders_state(5)[2]).to eq(@merchant_3)
+        expect(User.top_merchants_fulfilled_orders_state(5)[4]).to eq(@merchant_5)
       end
 
     end
