@@ -66,6 +66,16 @@ class User < ApplicationRecord
     .limit(count)
   end
 
+  def self.top_merchants_fulfilled_orders_last_month(count)
+    User.joins('inner join items i on i.merchant_id=users.id inner join order_items oi on oi.item_id=i.id inner join orders o on o.id=oi.order_id')
+    .select("users.*, count(distinct o.id) as order_count")
+    .where("oi.fulfilled=? AND o.status!=?", true, 2)
+    .where('extract(month from oi.updated_at)= ?', 12)
+    .group(:id)
+    .order("order_count desc")
+    .limit(count)
+  end
+
 
   # def top_merchants_fulfilled_orders_state(count)
   #     order_id_list = User.joins(:orders).where("users.state=?", self.state).pluck(:id)

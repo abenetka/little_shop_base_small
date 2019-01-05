@@ -136,6 +136,17 @@
     <% end %>
     </ol>
   <% end %>
+  
+  <%= tag.div id: 'top-10-merchants-fulfilled-orders-last-month' do %>
+    <h4>Top 10 Merchants Who Fulfilled Orders Last Month</h4>
+    <ol>
+    <% @top_10_merchants_fulfilled_orders_this_month.each do |merchant| %>
+    <%= tag.li class: 'merchant' do %>
+    <%= merchant.name %>, Orders: <%= merchant.order_count %>
+    <% end %>
+    <% end %>
+    </ol>
+  <% end %>
 
 
   <!-- < %= tag.div id: 'top-5-fastest-fulfilled-state' do %>
