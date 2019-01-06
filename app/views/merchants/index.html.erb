@@ -136,11 +136,11 @@
     <% end %>
     </ol>
   <% end %>
-  
+
   <%= tag.div id: 'top-10-merchants-fulfilled-orders-last-month' do %>
     <h4>Top 10 Merchants Who Fulfilled Orders Last Month</h4>
     <ol>
-    <% @top_10_merchants_fulfilled_orders_this_month.each do |merchant| %>
+    <% @top_10_merchants_fulfilled_orders_last_month.each do |merchant| %>
     <%= tag.li class: 'merchant' do %>
     <%= merchant.name %>, Orders: <%= merchant.order_count %>
     <% end %>
@@ -148,16 +148,17 @@
     </ol>
   <% end %>
 
-
-  <!-- < %= tag.div id: 'top-5-fastest-fulfilled-state' do %>
-    <h4>Top 5 Fastest Merchants for Fulfilled Orders to my State</h4>
-    <ol>
-    < % @top_5_merchants_fulfilled_orders_state.each do |merchant| %>
-    < %= tag.li class: 'merchant' do %>
-    < %= merchant.name %>, Fulfillment Time: < %= merchant.avg_f_time %>
-    < % end %>
-    < % end %>
-    </ol>
-  < % end %> -->
+  <% if current_user && current_user.default? %>
+    <%= tag.div id: 'top-5-fastest-fulfilled-state' do %>
+      <h4>Top 5 Fastest Merchants for Fulfilled Orders to my State</h4>
+      <ol>
+      <% @top_5_merchants_fulfilled_orders_state.each do |merchant| %>
+      <%= tag.li class: 'merchant' do %>
+      <%= merchant.name %>, Fulfillment Time: <%= merchant.avg_f_time %>
+      <% end %>
+      <% end %>
+      </ol>
+    <% end %>
+  <% end %>
 
 <% end %>
