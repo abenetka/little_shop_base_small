@@ -166,7 +166,7 @@ NYC, Seattle WA, Seattle FL
         @oi_8 = create(:fulfilled_order_item, item: @item_8, order: @order_8, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
       end
 
-      xit 'shows top 5 merchants who fulfilled items fastest to a state' do
+      it 'shows top 5 merchants who fulfilled items fastest to a state' do
         visit merchants_path
         within '#leaderboard' do
           within '#top-5-fastest-fulfilled-state' do

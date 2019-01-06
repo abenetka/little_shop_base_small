@@ -660,9 +660,13 @@ RSpec.describe User, type: :model do
         @oi_8 = create(:fulfilled_order_item, item: @item_8, order: @order_8, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
       end
 
-      xit '.top_merchants_fulfilled_orders_state' do
-        # binding.pry
+      it '.top_merchants_fulfilled_orders_state' do
+        #changed direction a little here and made changes to merchants_controller for this:
+        #@user = current_user
+        #@top_5_merchants_fulfilled_orders_state = @user.top_merchants_fulfilled_orders_state(5)
         expect(@user_3.top_merchants_fulfilled_orders_state(5)[0]).to eq(@merchant_1)
+
+        #thess are my original tests
         # expect(User.top_merchants_fulfilled_orders_state(5)[2]).to eq(@merchant_3)
         # expect(User.top_merchants_fulfilled_orders_state(5)[4]).to eq(@merchant_5)
       end
