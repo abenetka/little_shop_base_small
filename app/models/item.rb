@@ -41,4 +41,19 @@ class Item < ApplicationRecord
   def ever_ordered?
     OrderItem.find_by_item_id(self.id) !=  nil
   end
+
+  def self.current_inventory
+    sum(:inventory)
+  end
+
+  def self.total_inventory
+    order_items = OrderItem.all
+    sold_items =order_items.sum(:quantity)
+    current_inventory + sold_items
+  end
+
+  def self.percent_total_inventory_sold
+     ((current_inventory.to_f/total_inventory)*100).round(2)
+  end
+
 end
