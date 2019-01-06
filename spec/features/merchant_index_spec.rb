@@ -42,15 +42,6 @@ RSpec.describe 'Merchant Index Page', type: :feature do
         @order_4 = create(:completed_order, user: @user_4)
         @oi_4 = create(:fulfilled_order_item, item: @item_3, order: @order_4, quantity: 201, price: 200, created_at: 10.minutes.ago, updated_at: 5.minute.ago)
       end
-
-=begin
-- top 3 states where any orders were shipped
-NY, WA, FL
-- top 3 cities where any orders were shipped (Springfield, MI should not be grouped with Springfield, CO)
-NYC, Seattle WA, Seattle FL
-- top 3 biggest orders by quantity of items
-2, 3, 4
-=end
       it 'shows top 3 merchants by revenue' do
         visit merchants_path
         within '#statistics' do
@@ -113,7 +104,6 @@ NYC, Seattle WA, Seattle FL
       end
     end
 
-
     describe 'it shows stats to logged in users' do
       before :each do
         @user_1 = create(:user, city: 'Denver', state: 'CO')
@@ -121,7 +111,6 @@ NYC, Seattle WA, Seattle FL
         @user_3 = create(:user, city: 'Seattle', state: 'WA')
         @user_4 = create(:user, city: 'Seattle', state: 'FL')
 
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_3)
 
         @merchant_1 = create(:merchant, name: 'Merchant Name 1')
         @merchant_2 = create(:merchant, name: 'Merchant Name 2')
@@ -164,6 +153,8 @@ NYC, Seattle WA, Seattle FL
 
         @order_8 = create(:completed_order, user: @user_1)
         @oi_8 = create(:fulfilled_order_item, item: @item_8, order: @order_8, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_3)
       end
 
       it 'shows top 5 merchants who fulfilled items fastest to a state' do
@@ -175,9 +166,9 @@ NYC, Seattle WA, Seattle FL
             expect(page.all('.merchant')[2]).to have_content("#{@merchant_3.name}")
             expect(page.all('.merchant')[3]).to have_content("#{@merchant_4.name}")
             expect(page.all('.merchant')[4]).to have_content("#{@merchant_5.name}")
-            expect(page).to_not have_conent("#{@merchant_6.name}")
-            expect(page).to_not have_conent("#{@merchant_7.name}")
-            expect(page).to_not have_conent("#{@merchant_8.name}")
+            expect(page).to_not have_content("#{@merchant_6.name}")
+            expect(page).to_not have_content("#{@merchant_7.name}")
+            expect(page).to_not have_content("#{@merchant_8.name}")
           end
         end
       end

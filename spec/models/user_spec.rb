@@ -615,7 +615,6 @@ RSpec.describe User, type: :model do
         @user_3 = create(:user, city: 'Seattle', state: 'WA')
         @user_4 = create(:user, city: 'Seattle', state: 'FL')
 
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_3)
 
         @merchant_1 = create(:merchant, name: 'Merchant Name 1')
         @merchant_2 = create(:merchant, name: 'Merchant Name 2')
@@ -661,14 +660,11 @@ RSpec.describe User, type: :model do
       end
 
       it '.top_merchants_fulfilled_orders_state' do
-        #changed direction a little here and made changes to merchants_controller for this:
-        #@user = current_user
-        #@top_5_merchants_fulfilled_orders_state = @user.top_merchants_fulfilled_orders_state(5)
-        expect(@user_3.top_merchants_fulfilled_orders_state(5)[0]).to eq(@merchant_1)
-
-        #thess are my original tests
-        # expect(User.top_merchants_fulfilled_orders_state(5)[2]).to eq(@merchant_3)
-        # expect(User.top_merchants_fulfilled_orders_state(5)[4]).to eq(@merchant_5)
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[0]).to eq(@merchant_1)
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[1]).to eq(@merchant_2)
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[2]).to eq(@merchant_3)
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[3]).to eq(@merchant_4)
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[4]).to eq(@merchant_5)
       end
 
     end
