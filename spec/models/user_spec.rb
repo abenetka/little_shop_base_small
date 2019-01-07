@@ -615,7 +615,6 @@ RSpec.describe User, type: :model do
         @user_3 = create(:user, city: 'Seattle', state: 'WA')
         @user_4 = create(:user, city: 'Seattle', state: 'FL')
 
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user_3)
 
         @merchant_1 = create(:merchant, name: 'Merchant Name 1')
         @merchant_2 = create(:merchant, name: 'Merchant Name 2')
@@ -625,6 +624,8 @@ RSpec.describe User, type: :model do
         @merchant_6 = create(:merchant, name: 'Merchant Name 6')
         @merchant_7 = create(:merchant, name: 'Merchant Name 7')
         @merchant_8 = create(:merchant, name: 'Merchant Name 8')
+        @merchant_9 = create(:merchant, name: 'Merchant Name 9')
+        @merchant_10 = create(:merchant, name: 'Merchant Name 10')
 
         @item_1 = create(:item, user: @merchant_1)
         @item_2 = create(:item, user: @merchant_2)
@@ -634,6 +635,8 @@ RSpec.describe User, type: :model do
         @item_6 = create(:item, user: @merchant_6)
         @item_7 = create(:item, user: @merchant_7)
         @item_8 = create(:item, user: @merchant_8)
+        @item_9 = create(:item, user: @merchant_9)
+        @item_10 = create(:item, user: @merchant_10)
 
         @order_1 = create(:completed_order, user: @user_3)
         @oi_1 = create(:fulfilled_order_item, item: @item_1, order: @order_1, quantity: 10, price: 11, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
@@ -650,21 +653,43 @@ RSpec.describe User, type: :model do
         @order_5 = create(:completed_order, user: @user_3)
         @oi_5 = create(:fulfilled_order_item, item: @item_5, order: @order_5, quantity: 50, price: 15, created_at: 10.minutes.ago, updated_at: 5.minutes.ago)
 
-        @order_6 = create(:completed_order, user: @user_4)
+        @order_6 = create(:cancelled_order, user: @user_4)
         @oi_6 = create(:fulfilled_order_item, item: @item_6, order: @order_6, quantity: 60, price: 16, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
 
         @order_7 = create(:cancelled_order, user: @user_3)
         @oi_7 = create(:fulfilled_order_item ,item: @item_7, order: @order_7, quantity: 70, price: 17, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
 
-        @order_8 = create(:completed_order, user: @user_1)
+
+        @order_8 = create(:completed_order, user: @user_4)
         @oi_8 = create(:fulfilled_order_item, item: @item_8, order: @order_8, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 9.minutes.ago)
+
+        @order_9 = create(:completed_order, user: @user_4)
+        @oi_9 = create(:fulfilled_order_item, item: @item_9, order: @order_9, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 8.minutes.ago)
+
+        @order_10 = create(:completed_order, user: @user_4)
+        @oi_10 = create(:fulfilled_order_item, item: @item_10, order: @order_10, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 7.minutes.ago)
+
+        @order_11 = create(:completed_order, user: @user_4)
+        @oi_11 = create(:fulfilled_order_item, item: @item_1, order: @order_11, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 6.minutes.ago)
+
+        @order_12 = create(:completed_order, user: @user_4)
+        @oi_12 = create(:fulfilled_order_item, item: @item_2, order: @order_12, quantity: 80, price: 18, created_at: 10.minutes.ago, updated_at: 5.minutes.ago)
       end
 
-      xit '.top_merchants_fulfilled_orders_state' do
-        # binding.pry
-        expect(@user_3.top_merchants_fulfilled_orders_state(5)[0]).to eq(@merchant_1)
-        # expect(User.top_merchants_fulfilled_orders_state(5)[2]).to eq(@merchant_3)
-        # expect(User.top_merchants_fulfilled_orders_state(5)[4]).to eq(@merchant_5)
+      it '.top_merchants_fulfilled_orders_state' do
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[0]).to eq(@merchant_1)
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[1]).to eq(@merchant_2)
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[2]).to eq(@merchant_3)
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[3]).to eq(@merchant_4)
+        expect(User.top_merchants_fulfilled_orders_state(@user_3)[4]).to eq(@merchant_5)
+      end
+
+      it '.top_merchants_fulfilled_orders_city' do
+        expect(User.top_merchants_fulfilled_orders_city(@user_4)[0]).to eq(@merchant_8)
+        expect(User.top_merchants_fulfilled_orders_city(@user_4)[1]).to eq(@merchant_9)
+        expect(User.top_merchants_fulfilled_orders_city(@user_4)[2]).to eq(@merchant_10)
+        expect(User.top_merchants_fulfilled_orders_city(@user_4)[3]).to eq(@merchant_1)
+        expect(User.top_merchants_fulfilled_orders_city(@user_4)[4]).to eq(@merchant_2)
       end
 
     end
