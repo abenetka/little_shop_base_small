@@ -14,4 +14,13 @@ class OrderItem < ApplicationRecord
   def subtotal
     quantity * price
   end
+
+  def self.sales_for_year
+    OrderItem.select("*, sum(order_items.quantity * order_items.price) as revenue, date_trunc('month', order_items.updated_at) as month")
+    .where('extract(year from order_items.updated_at)= ?', 2018)
+    .group(:id)
+    .group('month')
+    .order('month')
+  end
+  
 end
