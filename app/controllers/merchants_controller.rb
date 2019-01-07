@@ -10,6 +10,7 @@ class MerchantsController < ApplicationController
     if current_user
       @user = current_user
       @top_5_merchants_fulfilled_orders_state = User.top_merchants_fulfilled_orders_state(@user)
+      @top_5_merchants_fulfilled_orders_city = User.top_merchants_fulfilled_orders_city(@user)
     end
     @top_3_revenue_merchants = User.top_3_revenue_merchants
     @top_3_fulfilling_merchants = User.top_3_fulfilling_merchants

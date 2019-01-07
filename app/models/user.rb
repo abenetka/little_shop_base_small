@@ -86,6 +86,16 @@ class User < ApplicationRecord
       .limit(5)
   end
 
+  def self.top_merchants_fulfilled_orders_city(current_user)
+    order_id_list = Order.joins(:user).where("users.city = ? and users.state = ?and orders.status!=?", current_user.city, current_user.state, 2).distinct.pluck(:id)
+    User.joins('inner join items i on i.merchant_id=users.id inner join order_items oi on oi.item_id=i.id inner join orders o on o.id=oi.order_id')
+      .select("users.*, avg(oi.updated_at - oi.created_at) as avg_f_time")
+      .where("o.id in (?) AND oi.fulfilled=?", order_id_list, true)
+      .group(:id)
+      .order("avg_f_time asc")
+      .limit(5)
+  end
+
   def my_pending_orders
     Order.joins(order_items: :item)
       .where("items.merchant_id=? AND orders.status=? AND order_items.fulfilled=?", self.id, 0, false)
