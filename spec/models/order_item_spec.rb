@@ -85,8 +85,17 @@ RSpec.describe OrderItem, type: :model do
       end
 
       it 'calculates total sales by month' do
-        expect(OrderItem.sales_for_year.first.revenue).to eq(2340)
-        expect(OrderItem.sales_for_year.last.revenue).to eq(240)
+        expected = ({"Jan"=>0.234e4,"Feb"=>0.228e4, "Mar"=>0.22e4,
+                    "Apr"=>0.2e4, "May"=>0.171e4, "Jun"=>0.144e4,
+                    "Jun"=>0.144e4,"Jul"=>0.119e4, "Aug"=>0.96e3,
+                    "Sep"=>0.75e3,  "Oct"=>0.56e3, "Nov"=>0.39e3,
+                    "Dec"=>0.24e3})
+
+        expect(OrderItem.sales_for_year.first[0]).to eq("Jan")
+        expect(OrderItem.sales_for_year.first[1]).to eq(2340)
+        expect(OrderItem.sales_for_year["Jan"]).to eq(2340)
+        expect(OrderItem.sales_for_year["Aug"]).to eq(960)
+        expect(OrderItem.sales_for_year).to eq(expected)
       end
     end
   end
