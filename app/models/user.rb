@@ -96,6 +96,13 @@ class User < ApplicationRecord
       .limit(5)
   end
 
+  def self.total_sales_pie_chart
+      User.joins(:items, {items: :order_items})
+      .select("users.name")
+        .group(:name)
+        .sum("order_items.quantity * order_items.price")
+  end
+
   def my_pending_orders
     Order.joins(order_items: :item)
       .where("items.merchant_id=? AND orders.status=? AND order_items.fulfilled=?", self.id, 0, false)
@@ -172,6 +179,5 @@ class User < ApplicationRecord
       .order('revenue desc')
       .limit(3)
   end
-
 
 end
