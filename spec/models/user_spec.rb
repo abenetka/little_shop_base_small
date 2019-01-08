@@ -78,7 +78,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe 'merchant leaderboard top merchants for month' do
+    describe 'merchant leaderboard top merchants by items sold' do
       before :each do
         @user_1 = create(:user, city: 'Denver', state: 'CO')
         @user_2 = create(:user, city: 'NYC', state: 'NY')
@@ -189,7 +189,7 @@ RSpec.describe User, type: :model do
       end
 
     end
-    describe 'merchant leaderboard top merchants for month' do
+    describe 'merchant leaderboard top merchants who fulfilled orders' do
       before :each do
         @user_1 = create(:user, city: 'Denver', state: 'CO')
         @user_2 = create(:user, city: 'NYC', state: 'NY')
@@ -604,6 +604,22 @@ RSpec.describe User, type: :model do
         expect(User.top_merchants_fulfilled_orders_last_month(5)[4]).to eq(@merchant_6)
         expect(User.top_merchants_fulfilled_orders_last_month(5).first.order_count).to eq(10)
         expect(User.top_merchants_fulfilled_orders_last_month(10).last.order_count).to eq(1)
+      end
+
+      it '.total_sales_pie_chart' do
+        expected =
+        ({"Merchant Name 1"=>0.941e4,
+          "Merchant Name 10"=>0.943e4,
+          "Merchant Name 2"=>0.2104e5,
+          "Merchant Name 3"=>0.242e4,
+          "Merchant Name 4"=>0.24e3,
+          "Merchant Name 5"=>0.22e3,
+          "Merchant Name 6"=>0.22e3,
+          "Merchant Name 7"=>0.22e3,
+          "Merchant Name 8"=>0.242e4,
+          "Merchant Name 9"=>0.2104e5})
+          
+        expect(User.total_sales_pie_chart).to eq(expected)
       end
 
     end
