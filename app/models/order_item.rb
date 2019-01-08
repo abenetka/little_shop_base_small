@@ -16,11 +16,10 @@ class OrderItem < ApplicationRecord
   end
 
   def self.sales_for_year
-    OrderItem.select("*, sum(order_items.quantity * order_items.price) as revenue, date_trunc('month', order_items.updated_at) as month")
+    OrderItem
     .where('extract(year from order_items.updated_at)= ?', 2018)
-    .group(:id)
-    .group('month')
-    .order('month')
+    .group_by_month(:updated_at, format: "%b")
+    .sum("quantity * price")
   end
-  
+
 end
