@@ -22,6 +22,9 @@ class MerchantsController < ApplicationController
     @top_10_merchants_items_sold_last_month = User.top_merchants_items_sold_last_month(10)
     @top_10_merchants_fulfilled_orders_this_month = User.top_merchants_fulfilled_orders_this_month(10)
     @top_10_merchants_fulfilled_orders_last_month = User.top_merchants_fulfilled_orders_last_month(10)
+    @sales_for_year = OrderItem.sales_for_year
+    @total_sales_pie_chart = User.total_sales_pie_chart
+    @total_sales = User.total_sales
   end
 
   def show
@@ -35,6 +38,7 @@ class MerchantsController < ApplicationController
     @most_items_user = @merchant.most_items_user
     @most_items_user = @merchant.most_items_user
     @top_3_revenue_users = @merchant.top_3_revenue_users
+    @pie_quantity_sold_percentage= @merchant.pie_quantity_sold_percentage
   end
 
   private

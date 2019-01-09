@@ -78,7 +78,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe 'merchant leaderboard top merchants for month' do
+    describe 'merchant leaderboard top merchants by items sold' do
       before :each do
         @user_1 = create(:user, city: 'Denver', state: 'CO')
         @user_2 = create(:user, city: 'NYC', state: 'NY')
@@ -189,7 +189,7 @@ RSpec.describe User, type: :model do
       end
 
     end
-    describe 'merchant leaderboard top merchants for month' do
+    describe 'merchant leaderboard top merchants who fulfilled orders' do
       before :each do
         @user_1 = create(:user, city: 'Denver', state: 'CO')
         @user_2 = create(:user, city: 'NYC', state: 'NY')
@@ -606,6 +606,28 @@ RSpec.describe User, type: :model do
         expect(User.top_merchants_fulfilled_orders_last_month(10).last.order_count).to eq(1)
       end
 
+      it '.total_sales_pie_chart' do
+        expected =
+        ({"Merchant Name 1"=>0.941e4,
+          "Merchant Name 10"=>0.943e4,
+          "Merchant Name 2"=>0.2104e5,
+          "Merchant Name 3"=>0.242e4,
+          "Merchant Name 4"=>0.24e3,
+          "Merchant Name 5"=>0.22e3,
+          "Merchant Name 6"=>0.22e3,
+          "Merchant Name 7"=>0.22e3,
+          "Merchant Name 8"=>0.242e4,
+          "Merchant Name 9"=>0.2104e5})
+
+        expect(User.total_sales_pie_chart).to eq(expected)
+      end
+
+      it '.total_sales' do
+        expect(User.total_sales).to eq(66660)
+      end
+
+
+
     end
 
     describe 'merchant leadboard fastest fulfillment times'do
@@ -753,6 +775,12 @@ RSpec.describe User, type: :model do
         expect(@merchant.quantity_sold_percentage[:total]).to eq(95)
         expect(@merchant.quantity_sold_percentage[:percentage]).to eq(15.79)
       end
+      
+      it '.pie_quantity_sold_percentage' do
+        expect(@merchant.pie_quantity_sold_percentage[:sold]).to eq(15)
+        expect(@merchant.pie_quantity_sold_percentage[:total]).to eq(95)
+      end
+
       it '.top_3_states' do
         expect(@merchant.top_3_states.first.state).to eq('CO')
         expect(@merchant.top_3_states.first.quantity_shipped).to eq(9)
