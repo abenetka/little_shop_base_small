@@ -567,18 +567,15 @@ RSpec.describe 'Merchant Index Page', type: :feature do
       @order_56 = create(:completed_order, user: @user_2)
       @oi_56 = create(:fulfilled_order_item, item: @item_10, order: @order_56, quantity: 1, price: 20, created_at: 2.days.ago, updated_at: 1.day.ago)
 
-      #sad path within time frame, but cancelled
       @order_57 = create(:cancelled_order, user: @user_2)
       @oi_57 = create(:fulfilled_order_item, item: @item_1, order: @order_57, quantity: 1, price: 20, created_at: 2.days.ago, updated_at: 1.day.ago)
 
       @order_58 = create(:cancelled_order, user: @user_2)
       @oi_58 = create(:fulfilled_order_item, item: @item_10, order: @order_58, quantity: 1, price: 20, created_at: 2.days.ago, updated_at: 1.day.ago)
 
-      #sad path cancelled and out of time frame
       @order_59 = create(:cancelled_order, user: @user_2)
       @oi_59 = create(:fulfilled_order_item, item: @item_10, order: @order_59, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 4.months.ago)
 
-      #sad path fulfilled but not in time frame
       @order_60 = create(:completed_order, user: @user_2)
       @oi_60 = create(:fulfilled_order_item, item: @item_10, order: @order_60, quantity: 1, price: 20, created_at: 5.months.ago, updated_at: 4.months.ago)
 
@@ -757,7 +754,6 @@ RSpec.describe 'Merchant Index Page', type: :feature do
       @order_116 = create(:completed_order, user: @user_2)
       @oi_116 = create(:fulfilled_order_item, item: @item_1, order: @order_116, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
 
-      #sad path within time frame, but cancelled
       @order_117 = create(:cancelled_order, user: @user_2)
       @oi_117 = create(:fulfilled_order_item, item: @item_1, order: @order_117, quantity: 1, price: 20, created_at: 3.months.ago, updated_at: 30.days.ago)
     end
