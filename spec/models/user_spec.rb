@@ -618,9 +618,15 @@ RSpec.describe User, type: :model do
           "Merchant Name 7"=>0.22e3,
           "Merchant Name 8"=>0.242e4,
           "Merchant Name 9"=>0.2104e5})
-          
+
         expect(User.total_sales_pie_chart).to eq(expected)
       end
+
+      it '.total_sales' do
+        expect(User.total_sales).to eq(66660)
+      end
+
+
 
     end
 
@@ -769,6 +775,12 @@ RSpec.describe User, type: :model do
         expect(@merchant.quantity_sold_percentage[:total]).to eq(95)
         expect(@merchant.quantity_sold_percentage[:percentage]).to eq(15.79)
       end
+      
+      it '.pie_quantity_sold_percentage' do
+        expect(@merchant.pie_quantity_sold_percentage[:sold]).to eq(15)
+        expect(@merchant.pie_quantity_sold_percentage[:total]).to eq(95)
+      end
+
       it '.top_3_states' do
         expect(@merchant.top_3_states.first.state).to eq('CO')
         expect(@merchant.top_3_states.first.quantity_shipped).to eq(9)
