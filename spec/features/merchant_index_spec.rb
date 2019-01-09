@@ -237,7 +237,7 @@ RSpec.describe 'Merchant Index Page', type: :feature do
     end
   end
 
-  describe 'it show leaderboard statistics' do
+  describe 'it shows leaderboard statistics' do
     before :each do
       @user_1 = create(:user, city: 'Denver', state: 'CO')
       @user_2 = create(:user, city: 'NYC', state: 'NY')
@@ -364,7 +364,7 @@ RSpec.describe 'Merchant Index Page', type: :feature do
     end
   end
 
-  describe 'merchant leaderboard top merchants for month' do
+  describe 'merchant leaderboard top merchants by month' do
     before :each do
       @user_1 = create(:user, city: 'Denver', state: 'CO')
       @user_2 = create(:user, city: 'NYC', state: 'NY')
