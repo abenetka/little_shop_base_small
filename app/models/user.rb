@@ -97,11 +97,17 @@ class User < ApplicationRecord
   end
 
   def self.total_sales_pie_chart
-      User.joins(:items, {items: :order_items})
+    User.joins(:items, {items: :order_items})
       .select("users.name")
-        .group(:name)
-        .sum("order_items.quantity * order_items.price")
+      .group(:name)
+      .sum("order_items.quantity * order_items.price")
   end
+
+  def self.total_sales
+    User.joins(:items, {items: :order_items})
+    .sum('order_items.quantity * order_items.price')
+  end
+
 
   def my_pending_orders
     Order.joins(order_items: :item)
@@ -130,6 +136,15 @@ class User < ApplicationRecord
       sold: sold,
       total: total,
       percentage: ((sold.to_f/total)*100).round(2)
+    }
+  end
+
+  def pie_quantity_sold_percentage
+    sold = self.items.joins(:order_items).where('order_items.fulfilled=?', true).sum('order_items.quantity')
+    total = self.items.sum(:inventory) + sold
+    {
+      sold: sold,
+      total: total,
     }
   end
 
