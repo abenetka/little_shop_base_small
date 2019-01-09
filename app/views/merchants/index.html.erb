@@ -171,8 +171,10 @@
       </ol>
     <% end %>
   <% end %>
-
-  <%= column_chart @sales_for_year %>
+    <h4>Sales by Month</h4>
+    <%= column_chart @sales_for_year %>
+    <h2>Total Sales for Site: <%= number_to_currency(@total_sales) %></h2>
+    <h4>Total Sales for Site by Merchant</h4>
   <%= pie_chart @total_sales_pie_chart %>
 
 <% end %>
